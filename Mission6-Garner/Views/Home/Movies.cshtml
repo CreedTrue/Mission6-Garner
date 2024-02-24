@@ -13,30 +13,29 @@
         <!--This is the Movie Creation form for the database-->
         <form method="post">
             <div class="form-group">
-                <label asp-for="Category">Category:</label>
-                <select asp-for="Category" required>
-                    <option value="" hidden disabled selected>Please select an option</option>
-                    <option value="action/adventure">Action/Adventure</option>
-                    <option value="drama">Drama</option>
-                    <option value="miscellaneous">Misc</option>
-                    <option value="comdey">Comedy</option>
-                    <option value="family">Family</option>
-                    <option value="horror/suspence">Horror/Suspence</option>
-                    <option value="television">Television</option>
-                    <option value="vhs">VHS</option>
+
+                <input type="hidden" asp-for="MovieId" />
+                
+                <label asp-for="CategoryId">Category:</label>
+                <select asp-for="CategoryId">
+                    <option value="">Please select a Category</option>
+                    @foreach (Category c in ViewBag.Categories)
+                    {
+                        <option value="@c.CategoryId">@c.CategoryName</option>
+                    }
                 </select>
                 <br />
                 <label asp-for="Title">Title:</label>
                 <input asp-for="Title" required/>
                 <br />
                 <label asp-for="Year">Year:</label>
-                <input asp-for="Year" min="1800" required/>
+                <input asp-for="Year" min="1888" required/>
                 <br />
                 <label asp-for="Director">Director:</label>
-                <input asp-for="Director" required/>
+                <input asp-for="Director"/>
                 <br />
                 <label asp-for="Rating">Rating:</label>
-                <select asp-for="Rating" required>
+                <select asp-for="Rating">
                     <option value="" hidden disabled selected>Please select an option</option>
                     <option value="G">G</option>
                     <option value="NR">NR</option>
@@ -50,19 +49,24 @@
                     <option value="TV-Y7">TV-Y7</option>
                     <option value="UR">UR</option>
                 </select>
-@*                 The last 3 inputs are optional*@
                 <br />
                 <label asp-for="Edited">Edited:</label>
-                <input type="checkbox" id="EditedCheckbox" />
+                <input type="checkbox" id="EditedCheckbox" asp-for="Edited" />
                 <input type="hidden" asp-for="Edited" />
                 <br />
                 <label asp-for="LentTo">Lent To:</label>
                 <input asp-for="LentTo" />
                 <br />
+                <label asp-for="CopiedToPlex">Copied to Plex:</label>
+                <input type="checkbox" id="CopiedToPlexCheckbox" asp-for="CopiedToPlex" />
+                <input type="hidden" asp-for="CopiedToPlex" />
+                <br />
                 <label asp-for="Notes">Notes:</label>
                 <input asp-for="Notes" />
                 <br />
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div asp-validation-summary="All"></div>
             </div>
         </form>
     </div>

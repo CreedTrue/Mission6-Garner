@@ -1,0 +1,64 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Movie List";
+}
+
+@model List<Movie>
+
+@* Table of Movies
+ *@
+ <section class="intro">
+  <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-0">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                    <table class="table table-striped mb-0">
+                        <thead style="background-color: #002d72;">
+                            <tr>
+                                <th scope="col">Category</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">Director</th>
+                                <th scope="col">Rating</th>
+                                <th scope="col">Edited</th>
+                                <th scope="col">Lent To</th>
+                                <th scope="col">Copied To Plex</th>
+                                <th scope="col">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var movie in Model)
+                            {
+                                <tr>
+                                    <td>@movie.Category.CategoryName</td>
+                                    <td>@movie.Title</td>
+                                    <td>@movie.Year</td>
+                                    <td>@movie.Director</td>
+                                    <td>@movie.Rating</td>
+                                    <td>@movie.Edited</td>
+                                    <td>@movie.LentTo</td>
+                                    <td>@movie.CopiedToPlex</td>
+                                    <td>@movie.Notes</td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@movie.MovieId">Edit</a></td>
+                                    <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@movie.MovieId">Delete</a></td>
+                                </tr>
+                            }
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

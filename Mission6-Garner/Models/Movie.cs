@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission6_Garner.Models
 {
@@ -7,19 +8,24 @@ namespace Mission6_Garner.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
-        [Required]
-        public string Category { get; set; }
-        [Required]
+
+        [ForeignKey("CategoryId")]
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        [Required(ErrorMessage ="A Title is required.")]
         public string Title { get; set; }
-        [Required]
-        public int Year { get; set; }
-        [Required]
-        public string Director { get; set; }
-        [Required]
-        public string Rating { get; set; }
-        public bool? Edited { get; set; }
+        [Required(ErrorMessage ="A Year is required")]
+        public int Year { get; set; } = 1888;
+        public string? Director { get; set; }
+        public string? Rating { get; set; }
+        [Required(ErrorMessage ="An editied value is required")]
+        public bool Edited { get; set; }
         public string? LentTo { get; set; }
-        [MaxLength(25)]
+        [Required(ErrorMessage ="A Copied To Plex value must be selected")]
+        public bool CopiedToPlex { get; set; }
+
+        [MaxLength(25, ErrorMessage = "The max Note length is 25 characters")]
         public string? Notes { get; set; }
     }
 }
